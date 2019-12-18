@@ -1,4 +1,5 @@
 require "calculator/version"
+require "calculator/runner"
 
 module Calculator
   class Error < StandardError; end

@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'calculator'
+Calculator::Runner.run
