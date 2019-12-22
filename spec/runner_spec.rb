@@ -26,7 +26,39 @@ RSpec.describe Calculator::Runner do
       allow(STDIN).to receive(:gets).and_return('2', '1')
     end
     it 'return add nums' do
-      expect(Calculator::Runner.run).to eq '2と1を足した数字は3です'
+      expect(Calculator::Runner.run).to eq "計算結果は3です" 
+    end
+  end
+  context 'select addition' do
+    before do
+      allow(STDIN).to receive(:gets).and_return('2', '1', '1')
+    end
+    it 'return 3' do
+      expect(Calculator::Runner.run).to eq "計算結果は3です"
+    end
+  end
+  context 'select subtraction' do
+    before do
+      allow(STDIN).to receive(:gets).and_return('2', '1', '2')
+    end
+    it 'return 1' do
+      expect(Calculator::Runner.run).to eq "計算結果は1です"
+    end
+  end
+  context 'select multiplication' do
+    before do
+      allow(STDIN).to receive(:gets).and_return('2', '3', '3')
+    end
+    it 'return 6' do
+      expect(Calculator::Runner.run).to eq "計算結果は6です"
+    end
+  end
+  context 'select division' do
+    before do
+      allow(STDIN).to receive(:gets).and_return('8', '2', '4')
+    end
+    it 'return 4' do
+      expect(Calculator::Runner.run).to eq "計算結果は4です"
     end
   end
 end
