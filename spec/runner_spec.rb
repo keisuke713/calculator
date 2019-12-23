@@ -61,4 +61,12 @@ RSpec.describe Calculator::Runner do
       expect(Calculator::Runner.run).to eq "計算結果は4です"
     end
   end
+  context 'select division when input 0' do
+    before do
+      allow(STDIN).to receive(:gets).and_return('1', '0', '4')
+    end
+    it 'return error message' do
+      expect(Calculator::Runner.run).to eq "0で割ることはできません"
+    end
+  end
 end

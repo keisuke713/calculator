@@ -24,7 +24,11 @@ module Calculator
         when '3'
           return Calculator::Output.run(num1.to_i * num2.to_i)
         when '4'
-          return Calculator::Output.run(num1.to_i / num2.to_i)
+          begin
+            return Calculator::Output.run(num1.to_i / num2.to_i)
+          rescue ZeroDivisionError => error
+            return "0で割ることはできません"
+          end
         else
           return '1から4の数字の中から選択してください'
         end
