@@ -1,9 +1,6 @@
 module Calculator
   class Runner
     def self.run
-      new.run
-    end
-    def run
       loop do
         print '一つ目の数字を入力してください:'
         num1 = STDIN.gets.chomp      
