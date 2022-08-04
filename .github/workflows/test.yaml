@@ -26,11 +26,12 @@ jobs:
         run: echo "terraform plan"
         working-directory: ${{ matrix.workdir }}
 
-      - name: Terraform Apply ref
-        if: github.ref == 'refs/heads/master'
-        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      - name: Terraform Apply
+        # これはマージしないでクローズした時も走っちゃう
+        # if: github.event.action == 'closed'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: echo "terraform apply"
 
-      - name: Terraform Apply event_name
-        if: github.event_name == 'push'
+      - name: Terraform Apply merged true
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
         run: echo "terraform apply"
