@@ -74,3 +74,5 @@ func isDigits(b byte) bool {
 func isSpace(b byte) bool {
 	return b == 9 || b == 32
 }
+
+func test() {}
