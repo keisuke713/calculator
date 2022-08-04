@@ -1,4 +1,4 @@
-name: 'Terraform GitHub Actions for services/bastion'
+name: 'Terraform GitHub Actions for services/bastion2'
 on:
   pull_request:
     # types: [closed]
