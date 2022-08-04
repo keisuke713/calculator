@@ -1,0 +1,35 @@
+name: 'Terraform GitHub Actions for services/bastion'
+on:
+  pull_request:
+    # types: [closed]
+    types: [opened, synchronize, closed]
+    branches:
+      - master
+jobs:
+  terraform:
+    name: 'terraform'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    strategy:
+      matrix:
+        workdir: [lexer, token]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Terraform Plan
+        id: plan
+        if: github.event.action == 'opened' || github.event.action == 'synchronize'
+        run: echo "terraform plan"
+        working-directory: ${{ matrix.workdir }}
+
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      #   run: echo "terraform apply"
+
+      - name: Terraform Apply merged true
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        run: echo "terraform apply"
