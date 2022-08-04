@@ -19,3 +19,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Terraform Plan
+        id: plan
+        if: github.event.action == 'opened' || github.event.action == 'synchronize'
+        run: echo "terraform plan"
+        working-directory: ${{ matrix.workdir }}
