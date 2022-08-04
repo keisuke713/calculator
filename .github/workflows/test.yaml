@@ -5,3 +5,17 @@ on:
     # types: [opened, synchronize, closed]
     branches:
       - master
+jobs:
+  terraform:
+    name: 'terraform'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    strategy:
+      matrix:
+        workdir: [lexer, token]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
