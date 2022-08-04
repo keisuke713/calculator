@@ -1,0 +1,34 @@
+name 'test workflows'
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - master
+    paths:
+      - 'lexer/**.go'
+jobs:
+  terraform:
+    name: 'test echo'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    strategy:
+      matrix:
+        workdir: [lexer]
+    steps:
+      - name Checkout
+        uses: actions/checkout@v2
+
+      - name echo when open or synchronize pull request
+        if: github.event.action == 'opened' || github.event.action == 'synchronize'
+        run: echo 'evetn action is opened or synchronize'
+
+      - name echo when close pull request
+        if: github.event.action == 'closed'
+        run: echo 'evetn action is closed'
+
+      - name echo when close pull request
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: echo 'evetn action is closed'
