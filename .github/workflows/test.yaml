@@ -1,10 +1,12 @@
 name: 'Terraform GitHub Actions for services/bastion'
 on:
   pull_request:
-    # types: [closed]
     types: [opened, synchronize, closed]
     branches:
       - master
+    paths:
+      - ".github/workflows/test.yaml"
+      - "lexer/**.go"
 jobs:
   terraform:
     name: 'terraform'
@@ -27,11 +29,5 @@ jobs:
         working-directory: ${{ matrix.workdir }}
 
       - name: Terraform Apply
-        # これはマージしないでクローズした時も走っちゃう
-        # if: github.event.action == 'closed'
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: echo "terraform apply"
-
-      - name: Terraform Apply merged true
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        if: github.event.action == 'closed' && github.event.pull_request.merged == true
         run: echo "terraform apply"
