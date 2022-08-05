@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - ".github/workflows/test.yaml"
       - "lexer/**.go"
 jobs:
   terraform:
@@ -26,7 +27,6 @@ jobs:
         if: github.event.action == 'opened' || github.event.action == 'synchronize'
         run: echo "terraform plan"
         working-directory: ${{ matrix.workdir }}
-        run: echo "terraform apply"
 
       - name: Terraform Apply
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
