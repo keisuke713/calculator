@@ -29,7 +29,7 @@ jobs:
         working-directory: ${{ matrix.workdir }}
 
       - uses: actions/github-script@v6
-        if: github.event.action == 'closed' && github.event.pull_request.merged == true
+        # if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
@@ -42,7 +42,7 @@ jobs:
 
             \`\`\`\n
             ${{ steps.validate.outputs.stdout }}
-            \`\`\`
+            \`\`\`\
 
             </details>
 
