@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
-	fmt.Println("test2")
-	fmt.Println("test3")
+func main2() {
+	fmt.Println("fix/test4-1")
+	fmt.Println("fix/test4-2")
 }
